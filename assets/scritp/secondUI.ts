@@ -12,6 +12,7 @@ var sumPs = 0
 var sumCs1 = 0
 var sumCs2 = 0
 
+
 @ccclass
 export default class NewClass extends cc.Component {
 
@@ -91,8 +92,28 @@ export default class NewClass extends cc.Component {
 
 	}
 
-	aaa() {
+	anime(n) {
+		console.log('anime' + n);
 
+		if (n == 1) {
+			this.rock.getComponent(cc.Animation).play('chooseRock')
+			this.paper.getComponent(cc.Animation).play('paper')
+			this.scissor.getComponent(cc.Animation).play('scissor')
+		} else if (n == 2) {
+			this.rock.getComponent(cc.Animation).play('rock')
+			this.paper.getComponent(cc.Animation).play('choosePaper')
+			this.scissor.getComponent(cc.Animation).play('scissor')
+		} else if (n == 3) {
+			this.rock.getComponent(cc.Animation).play('rock')
+			this.paper.getComponent(cc.Animation).play('paper')
+			this.scissor.getComponent(cc.Animation).play('chooseScissor')
+		}
+	}
+
+	animeOff() {
+		this.rock.getComponent(cc.Animation).play('rock')
+		this.paper.getComponent(cc.Animation).play('paper')
+		this.scissor.getComponent(cc.Animation).play('scissor')
 	}
 
 	random() {
@@ -163,6 +184,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onSelect(n) {
+
 		this.result.active = true
 		this.layout.active = false
 		n = this.num //disable button
@@ -201,6 +223,9 @@ export default class NewClass extends cc.Component {
 
 		this.picChange(this.result1, this.path[1], showResult1)
 		this.picChange(this.result2, this.path[1], showResult2)
+		this.animeOff()
+
+
 
 		console.log('p score = ' + x1 + x2);
 		console.log('c1 score = ' + y1 + y2);
@@ -208,6 +233,7 @@ export default class NewClass extends cc.Component {
 	}
 
 	onChoose(e, choose) {
+		this.anime(choose)
 		console.log('choose = ' + choose)
 		this.num = choose
 		console.log('num = ' + this.num)
